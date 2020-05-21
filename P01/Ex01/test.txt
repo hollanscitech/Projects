@@ -1,0 +1,26 @@
+(A) "hello" "hello" == 1  both strings match once
+(B) "hello" "h" == 0 both strings never match
+(C) "hello" "hell" == 0 both strings never match
+(D) "" " " == 0 an empty string does not match a string with a space
+(E) "" "" == 1 empty strings match
+(F) " " "*" == 1 a star can match a space character
+(G) "hello" "*" == 1 a star matches any character string
+(H) "hello" "h" == 0 both strings never match in full
+(I) "hello" "he" == 0 both strings never match
+(J) "hello" "h*" == 1 star matches "ello" string to make strings match once
+(K) "hello" "hlo" == 0 strings never match entirely
+(L) "hello" "hell*" == 1 star matches "o" to make strins match once
+(M) "hello" "hello*" == 1 star replaces empty char to make strings match once
+(N) "hello" "he*" == 1 star replaced by "llo" to make strings match once
+(O) "hello" "lo" == 0 strings never match entirely
+(P) "abcbd" "*b* == 2 ("a","cbd") and ("abc", "d")
+(Q) "abc" "a**" == 3 ("b", "c") and ("bc", nothing) and (nothing, "bc")
+(R) "abc" "abc" == 1 strings match once
+(S) "abc" "ab*" == 1 star replaced by "c" making strings match once
+(T) "abc" "abc*" == 1 star replaced by empty char  making strings match once
+(U) "abc" "*" == 1 star	replaced by "abc" making strings match once
+(V) "abc" "**" == 4 ("abc", nothing) and (nothing, "abc") and ("ab", "c") and ("a", "bc")
+(W) "abc" "***" == 10 ("abc", nothing, nothing) and (nothing, "abc", nothing) and (nothing, nothing, "abc") and ("a", "b", "c") and ("ab", "c", nothing) and ("a", "bc", nothing) and (nothing, "a" "bc") and (nothing, "ab", "c") and ("a", nothing, "bc") and ("ab", nothing, "c")
+(X) "abc" "**a" == 0 the best attempt to make both strings match is (nothing, nothing) which leaves s1 = "abc" and s2 = "a", but a star char is needed after "a" in order to make both strings identical.
+(y) "abc" "*a*" == 1 (nothing, "bc")
+(Z) "abc" "cba" == 0 strings do not match
