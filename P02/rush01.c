@@ -7,8 +7,7 @@
 F1 (ft_putchar) //writes characters
 F2 (formatArgv) //formats argv inputs
 F3 (makeSudoku) // 
-F4 (printSudoku) //writes every character of a 2D array onto the standard output
-F5 = 
+F4 (printSudoku) //writes every character of a 2D array onto the standard output 
 */
 
 //F1
@@ -73,5 +72,5 @@ int main(int argc, char* argv[]) {
   }
   return 0;
 }
-  
+
   
