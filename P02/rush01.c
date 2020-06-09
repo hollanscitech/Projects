@@ -62,7 +62,9 @@ int main(int argc, char* argv[]) {
       z++;
     }
     sudoku[y] = NULL;
+    ft_putchar('\n');
     printSudoku(sudoku);
+    ft_putchar('\n');
   }
   return 0;
 }
