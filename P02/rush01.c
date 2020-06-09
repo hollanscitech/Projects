@@ -35,11 +35,14 @@ char *formatArgv(char *argv) {
 void printSudoku(char **sudoku) {
   int x = 0;
   int y = 0;
+  int length = strlen(sudoku[y]);
   while(sudoku[y] != '\0') {
     x = 0;
     while(sudoku[y][x] != '\0') {
       ft_putchar(sudoku[y][x]);
-      ft_putchar(' ');
+      if (x < (length - 1)) {
+	ft_putchar(' ');
+      }
       x++;
     }
     ft_putchar('\n');
