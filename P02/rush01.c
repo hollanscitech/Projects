@@ -35,7 +35,7 @@ char *formatArgv(char *argv) {
 }
 
 //F3
-int sameRow(int y, int x, int num, char **sudoku) {
+int sameRow(int y, int x, char num, char **sudoku) {
   x = 0;
   while (x < 9) {
     if (sudoku[y][x] == num) {
@@ -47,7 +47,7 @@ int sameRow(int y, int x, int num, char **sudoku) {
 }
 
 //F4
-int sameColumn(int y, int x, int num, char **sudoku) {
+int sameColumn(int y, int x, char num, char **sudoku) {
    y = 0;
   while	(y < 9) {
     if (sudoku[y][x] == num) {
@@ -59,19 +59,25 @@ int sameColumn(int y, int x, int num, char **sudoku) {
 }
 
 //F5
-int sameSubGrid(int y, int x, int num, char **sudoku) {
-  if (x < 3 || y < 3) {
+int sameSubGrid(int y, int x, char num, char **sudoku) {
+  if (x < 3) {
     x = 0;
-    y = 0;
-  } else if (x < 6 || y < 6) {
+  } else if (x < 6) {
     x = 3;
-    y = 3;
   } else {
     x = 6;
+  }
+  if (y < 3) {
+    y = 0;
+  } else if (y < 6) {
+    y = 3;
+  } else {
     y = 6;
   }
-  while (y < (y + 3)) {
-    while (x < (x + 3)) {
+  int a = y + 3;
+  int b = x + 3;
+  while (y < a) {
+    while (x < b) {
       if (sudoku[y][x] == num) {
 	return 1;
       }
@@ -87,8 +93,8 @@ int sameSubGrid(int y, int x, int num, char **sudoku) {
 char **solveSudoku(char **sudoku) {
   int x = 0;
   int y = 0;
-  int num = 1;
-  while (num < 10) {
+  char num = '1';
+  while (num <= '9') {
     x = 0;
     while (x < 9) {
       if (sudoku[y][x] == '0') {
