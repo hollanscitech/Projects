@@ -5,11 +5,11 @@
 /* 
 F1 (ft_putchar)//writes characters
 F2 (formatArgv)//formats argv inputs
-F3 (checkRow)//determines if the character placement will break Sudoku rules for rows
-F4 (checkColumn)//determines if the character placement will break Sudoku rules for columns
-F5 (checkSubGrid)//determines if the character placement will break Sudoku rules for subgrids
+F3 (sameRow)//determines if the character placement will break Sudoku rules for rows
+F4 (sameColumn)//determines if the character placement will break Sudoku rules for columns
+F5 (sameSubGrid)//determines if the character placement will break Sudoku rules for subgrids
 F6 (solveSudoku)//solves the sudoku 2D array
-F7 (putFormStr)//writes every value from a 2D character array onto the standard output
+F7 (printSudoku)//writes every value from a 2D character array onto the standard output
 */
 
 //F1
@@ -35,21 +35,86 @@ char *formatArgv(char *argv) {
 }
 
 //F3
+int sameRow(int y, int x, int num, char **sudoku) {
+  x = 0;
+  while (x < 9) {
+    if (sudoku[y][x] == num) {
+      return 1;
+    }
+    x++;
+  }
+  return 0;
+}
+
 //F4
+int sameColumn(int y, int x, int num, char **sudoku) {
+   y = 0;
+  while	(y < 9) {
+    if (sudoku[y][x] == num) {
+      return 1;
+    }
+    y++;
+  }
+  return 0;
+}
+
 //F5
+int sameSubGrid(int y, int x, int num, char **sudoku) {
+  if (x < 3 || y < 3) {
+    x = 0;
+    y = 0;
+  } else if (x < 6 || y < 6) {
+    x = 3;
+    y = 3;
+  } else {
+    x = 6;
+    y = 6;
+  }
+  while (y < (y + 3)) {
+    while (x < (x + 3)) {
+      if (sudoku[y][x] == num) {
+	return 1;
+      }
+      x++;
+    }
+    y++;
+    x = x - 2;
+  }
+  return 0;
+}
+
 //F6
+char **solveSudoku(char **sudoku) {
+  int x = 0;
+  int y = 0;
+  int num = 1;
+  while (num < 10) {
+    x = 0;
+    while (x < 9) {
+      if (sudoku[y][x] == '0') {
+	if (!sameRow(y, x, num, sudoku) && !sameColumn(y, x, num, sudoku) && !sameSubGrid(y, x, num, sudoku)) {
+	  sudoku[y][x] = num;
+	}
+      }
+      x++;
+    }
+    y++;
+    num++;
+  }
+  return sudoku;
+}
 
 //F7
 void printSudoku(char **sudoku) {
   int x = 0;
   int y = 0;
   int length = strlen(sudoku[y]);
-  while(sudoku[y] != '\0') {
+  while (sudoku[y] != '\0') {
     x = 0;
-    while(sudoku[y][x] != '\0') {
+    while (sudoku[y][x] != '\0') {
       ft_putchar(sudoku[y][x]);
       if (x < (length - 1)) {
-	ft_putchar(' ');
+        ft_putchar(' ');
       }
       x++;
     }
@@ -59,7 +124,7 @@ void printSudoku(char **sudoku) {
 }
 
 int main(int argc, char* argv[]) {
-  if (argc > 1 && argc <= 10) {
+  if (argc == 10) {
     int z = 1;
     char **sudoku;
     sudoku = (char**) malloc(sizeof(char*) * (argc));
@@ -70,9 +135,7 @@ int main(int argc, char* argv[]) {
       z++;
     }
     sudoku[y] = NULL;
-    ft_putchar('\n');
-    printSudoku(sudoku);
-    ft_putchar('\n');
+    printSudoku(solveSudoku(sudoku));
   }
   return 0;
 }
