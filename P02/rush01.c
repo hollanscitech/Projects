@@ -87,14 +87,12 @@ char **solveSudoku(char **sudoku) {
     while (y < 9) {
       x = 0;
       while (x < 9) {
-	if (sudoku[y][x] == '0') {
-	  if (!sameRow(y, x, num, sudoku)
-	      && !sameColumn(y, x, num, sudoku)
-	      && !sameSubGrid(y, x, num, sudoku)) {
-	    sudoku[y][x] = num;
-	  }
-	}
-	x++;
+        if (sudoku[y][x] == '0') {
+          if (!sameRow(y, x, num, sudoku) && !sameColumn(y, x, num, sudoku) && !sameSubGrid(y, x, num, sudoku)) {
+            sudoku[y][x] = num;
+          }
+        }
+        x++;
       }
       y++;
     }
@@ -121,7 +119,7 @@ void printSudoku(char **sudoku) {
     y++;
   }
 }
-
+ 
 int main(int argc, char* argv[]) {
   if (argc == 10) {
     int x = 0;
@@ -143,3 +141,4 @@ int main(int argc, char* argv[]) {
   }
   return 0;
 }
+
