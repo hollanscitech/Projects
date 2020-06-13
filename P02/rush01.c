@@ -60,30 +60,19 @@ int sameColumn(int y, int x, char num, char **sudoku) {
 
 //F5
 int sameSubGrid(int y, int x, char num, char **sudoku) {
-  if (x < 3) {
-    x = 0;
-  } else if (x < 6) {
-    x = 3;
-  } else {
-    x = 6;
-  }
-  if (y < 3) {
-    y = 0;
-  } else if (y < 6) {
-    y = 3;
-  } else {
-    y = 6;
-  }
-  int xTemp = x + 3;
-  int yTemp = y + 3;
-  while (y < yTemp) {
-    while (x < xTemp) {
-      if (sudoku[y][x] == num) {
+  x -= x % 3;
+  y -= y % 3;
+  int xTemp = 0;
+  int yTemp = 0;
+  while (yTemp < 3) {
+    xTemp = 0;
+    while (xTemp < 3) {
+      if (sudoku[y + yTemp][x + xTemp] == num) {
 	return 1;
       }
-      x++;
+      xTemp++;
     }
-    y++;
+    yTemp++;
   }
   return 0;
 }
@@ -99,7 +88,9 @@ char **solveSudoku(char **sudoku) {
       x = 0;
       while (x < 9) {
 	if (sudoku[y][x] == '0') {
-	  if (!sameRow(y, x, num, sudoku) && !sameColumn(y, x, num, sudoku) && !sameSubGrid(y, x, num, sudoku)) {
+	  if (!sameRow(y, x, num, sudoku)
+	      && !sameColumn(y, x, num, sudoku)
+	      && !sameSubGrid(y, x, num, sudoku)) {
 	    sudoku[y][x] = num;
 	  }
 	}
@@ -133,16 +124,14 @@ void printSudoku(char **sudoku) {
 
 int main(int argc, char* argv[]) {
   if (argc == 10) {
-    int z = 1;
+    int x = 0;
     char **sudoku;
     sudoku = (char**) malloc(sizeof(char*) * (argc));
-    int y = 0;
-    while (argv[z] != NULL) {
-      sudoku[y] = formatArgv(argv[z]);
-      y++;
-      z++;
+    while (argv[x + 1] != NULL) {
+      sudoku[x] = formatArgv(argv[x + 1]);
+      x++;
     }
-    sudoku[y] = NULL;
+    sudoku[x] = NULL;
     ft_putchar('\n');
     ft_putchar('\n');
     printSudoku(sudoku);
