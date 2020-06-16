@@ -79,25 +79,20 @@ int sameSubGrid(int y, int x, char num, char **sudoku) {
 
 //F6
 char **solveSudoku(char **sudoku) {
-  int x = 0;
-  int y = 0;
-  char num = '1';
-  while (y < 9) {
-    x = 0;
-    while (x < 9) {
+  int x;
+  int y;
+  char num;
+  for (y = 0; y < 9; y++) {
+    for (x = 0; x < 9; x++) {
       if (sudoku[y][x] == '0') {
-	num = '1';
-	while (num <= '9') {
+	for (num = '1'; num <= '9'; num++) {
 	  if (!sameRow(y, x, num, sudoku) && !sameColumn(y, x, num, sudoku) && !sameSubGrid(y, x, num, sudoku)) {
 	    sudoku[y][x] = num;
 	    solveSudoku(sudoku);
 	  }
-	  num++;
 	}
       }
-      x++;
     }
-    y++;
   }
   return sudoku;
 }
@@ -144,6 +139,9 @@ int main(int argc, char* argv[]) {
 }
 
 /*
+
+ORIGINAL
+
 //F6
 char **solveSudoku(char **sudoku) {
   int x = 0;
@@ -167,4 +165,34 @@ char **solveSudoku(char **sudoku) {
   }
   return sudoku;
 } 
+*/
+
+/*
+
+LESS ZEROS W/ RECURSION
+
+//F6
+char **solveSudoku(char **sudoku) {
+  int x = 0;
+  int y = 0;
+  char num = '1';
+  while (y < 9) {
+    x = 0;
+    while (x < 9) {
+      if (sudoku[y][x] == '0') {
+        num = '1';
+        while (num <= '9') {
+          if (!sameRow(y, x, num, sudoku) && !sameColumn(y, x, num, sudoku) && !sameSubGrid(y, x, num, sudoku)) {
+            sudoku[y][x] = num;
+            solveSudoku(sudoku);
+          }
+          num++;
+        }
+      }
+      x++;
+    }
+    y++;
+  }
+  return sudoku;
+}
 */
