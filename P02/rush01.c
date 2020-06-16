@@ -85,8 +85,8 @@ char **solveSudoku(char **sudoku) {
   while (y < 9) {
     x = 0;
     while (x < 9) {
-      num = '1';
       if (sudoku[y][x] == '0') {
+	num = '1';
 	while (num <= '9') {
 	  if (!sameRow(y, x, num, sudoku) && !sameColumn(y, x, num, sudoku) && !sameSubGrid(y, x, num, sudoku)) {
 	    sudoku[y][x] = num;
