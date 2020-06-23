@@ -3,13 +3,13 @@
 #include <stdlib.h>
 
 /* 
-F1 (ft_putchar)//writes characters
-F2 (formatArgv)//formats argv inputs
-F3 (sameRow)//determines if the character placement will break Sudoku rules for rows
-F4 (sameColumn)//determines if the character placement will break Sudoku rules for columns
-F5 (sameSubGrid)//determines if the character placement will break Sudoku rules for subgrids
-F6 (solveSudoku)//solves the sudoku 2D array
-F7 (printSudoku)//writes every value from a 2D character array onto the standard output
+F1 (ft_putchar) writes characters
+F2 (formatArgv) formats argv inputs
+F3 (sameRow) determines if the character placement will break Sudoku rules for rows
+F4 (sameColumn) determines if the character placement will break Sudoku rules for columns
+F5 (sameSubGrid) determines if the character placement will break Sudoku rules for subgrids
+F6 (printSudoku) writes every value from a 2D character array onto the standard output       
+F7 (solveSudoku) solves the sudoku 2D array with recursion and backtracking
 */
 
 //F1
@@ -48,7 +48,7 @@ int sameRow(int y, int x, char num, char **sudoku) {
 
 //F4
 int sameColumn(int y, int x, char num, char **sudoku) {
-   y = 0;
+  y = 0;
   while	(y < 9) {
     if (sudoku[y][x] == num) {
       return 1;
@@ -77,7 +77,7 @@ int sameSubGrid(int y, int x, char num, char **sudoku) {
   return 0;
 }
 
-//F7
+//F6
 void printSudoku(char **sudoku) {
   int x = 0;
   int y = 0;
@@ -96,7 +96,7 @@ void printSudoku(char **sudoku) {
   }
 }
 
-//F6
+//F7
 int solveSudoku(char **sudoku, int y, int x) {
   int tempX = 0;
   int tempY = 0;
@@ -122,9 +122,6 @@ int solveSudoku(char **sudoku, int y, int x) {
   
   if (sudoku[y][x] == '0') {
     while (num <= '9') {
-      //if (y == 8 && x == 8) {
-      //return 1;
-      //}
       if (!sameRow(y, x, num, sudoku) && !sameColumn(y, x, num, sudoku) && !sameSubGrid(y, x, num, sudoku)) {
 	sudoku[y][x] = num;
 	if (y == 8 && x == 8) {
@@ -160,14 +157,14 @@ int main(int argc, char* argv[]) {
       y++;
     }
     sudoku[y] = NULL;
-
+    
     ft_putchar('\n');
     printSudoku(sudoku);
     ft_putchar('\n');
     
-    int mainX = 0;
-    int mainY = 0;
-    solveSudoku(sudoku, mainY, mainX);
+    y = 0;
+    int x = 0;
+    solveSudoku(sudoku, y, x);
   }
   return 0;
 }
