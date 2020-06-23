@@ -105,10 +105,10 @@ int solveSudoku(char **sudoku, int y, int x) {
     if (y == 8 && x == 8) {
       return 1;
     }
-    if (x < 9) {
+    if (x < 8) {
       x++;
     } else {
-      if (y < 9) {
+      if (y < 8) {
 	x = 0;
 	y++;
       }
@@ -122,16 +122,19 @@ int solveSudoku(char **sudoku, int y, int x) {
   
   if (sudoku[y][x] == '0') {
     while (num <= '9') {
-      if (y == 8 && x == 8) {
-	printSudoku(sudoku);
-	return 1;
-      }
+      //if (y == 8 && x == 8) {
+      //return 1;
+      //}
       if (!sameRow(y, x, num, sudoku) && !sameColumn(y, x, num, sudoku) && !sameSubGrid(y, x, num, sudoku)) {
 	sudoku[y][x] = num;
-	if (x < 9) {
+	if (y == 8 && x == 8) {
+	  printSudoku(sudoku);
+	  return 1;
+	}
+	if (x < 8) {
 	  tempX = x + 1;
 	} else {
-	  if (y < 9) {
+	  if (y < 8) {
 	    tempX = 0;
 	    tempY = y + 1;
 	  }
