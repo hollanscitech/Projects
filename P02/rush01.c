@@ -8,7 +8,7 @@ F2 (formatArgv) formats argv inputs
 F3 (sameRow) determines if the character placement will break Sudoku rules for rows
 F4 (sameColumn) determines if the character placement will break Sudoku rules for columns
 F5 (sameSubGrid) determines if the character placement will break Sudoku rules for subgrids
-F6 (printSudoku) writes every value from a 2D character array onto the standard output       
+F6 (printSudoku) writes every value from a 2D character array onto the standard output
 F7 (solveSudoku) solves the sudoku 2D array with recursion and backtracking
 */
 
@@ -103,6 +103,7 @@ int solveSudoku(char **sudoku, int y, int x) {
   char num = '1';
   if (sudoku[y][x] != '0') {
     if (y == 8 && x == 8) {
+      printSudoku(sudoku);
       return 1;
     }
     if (x < 8) {
@@ -119,14 +120,14 @@ int solveSudoku(char **sudoku, int y, int x) {
       return 0;
     }
   }
-  
+
   if (sudoku[y][x] == '0') {
     while (num <= '9') {
       if (!sameRow(y, x, num, sudoku) && !sameColumn(y, x, num, sudoku) && !sameSubGrid(y, x, num, sudoku)) {
 	sudoku[y][x] = num;
 	if (y == 8 && x == 8) {
-	  printSudoku(sudoku);
-	  return 1;
+          printSudoku(sudoku);
+          return 1;
 	}
 	if (x < 8) {
 	  tempX = x + 1;
