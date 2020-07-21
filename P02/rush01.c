@@ -3,13 +3,14 @@
 #include <stdlib.h>
 
 /* 
-F1 (ft_putchar) writes characters
-F2 (formatArgv) formats argv inputs
-F3 (sameRow) determines if the character placement will break Sudoku rules for rows
-F4 (sameColumn) determines if the character placement will break Sudoku rules for columns
-F5 (sameSubGrid) determines if the character placement will break Sudoku rules for subgrids
-F6 (printSudoku) writes every value from a 2D character array onto the standard output
-F7 (solveSudoku) solves the sudoku 2D array with recursion and backtracking
+F1 (ft_putchar) writes characters onto the output screen.
+F2 (formatArgv) formats argv inputs. Takes argv from terminal as a parameter. Finds the string length of argv and makes a string copy of it. If it encounters a '.' character, it rewrites it as a '0' on the new string. Memory must be allocated for the new string.
+F3 (sameRow) determines if the character placement will break Sudoku rules for rows.
+F4 (sameColumn) determines if the character placement will break Sudoku rules for columns.
+F5 (sameSubGrid) determines if the character placement will break Sudoku rules for subgrids.
+F6 (printSudoku) writes every value from a 2D character array onto the standard output.
+F7 (solveSudoku) solves the sudoku 2D array with recursion and backtracking. 
+F8 (main function) only runs the program if 9 strings are passed through the terminal, which is what is needed to build a standard sudoku puzzle. Memory allocating is required for the 2D array of strings. Iterates through each argv one at a time ands send them to F2 to get formatted. F2 returns the formatted string and is then coppied onto the 2D array respectively. After the 2D array is built, it is printed onto the output screen. The 2D array is then passed to F7 for the sudoku to be solved. 
 */
 
 //F1
@@ -148,6 +149,7 @@ int solveSudoku(char **sudoku, int y, int x) {
   return 0;
 }
 
+//F8
 int main(int argc, char* argv[]) {
   if (argc == 10) {
     int y = 0;
